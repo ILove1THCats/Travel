@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bản đồ du lịch TP.HCM</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'mapapp/style.css' %}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        #map { height: 500px; }
+    </style>
+</head>
+<body>
+    <h1>Bản đồ du lịch TP.HCM</h1>
+    
+    <!-- Đây là thanh tìm kiếm của tớ bạn thân à -->
+    <form method="get" action="">
+        <input type="text" name="q" placeholder="Tìm kiếm địa điểm">
+        <button type="submit">Tìm kiếm</button>
+    </form>
+     
+    <!-- Địa điểm tìm được -->
+    <div id="app">
+        <div id="map"></div>
+        {% for location in locations %}
+            <p>{{ location.name }} - {{ location.description }}</p>
+        {% endfor %}
+    </div>
+
+    <!-- Thanh tẩy =)) -->
+    <form method="get" action="">
+        <select name="category">
+            <option value="">Tất cả</option>
+            <option value="Nhà hàng">Nhà hàng</option>
+            <option value="Khách sạn">Khách sạn</option>
+            <option value="Địa điểm du lịch">Địa điểm du lịch</option>
+        </select>
+        <button type="submit">Lọc</button>
+    </form>
+
+    <div id="app">
+        <div id="map"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="{% static 'mapapp/script.js' %}"></script>
+
+    <form method="post">
+        {% csrf_token %}
+       <label for="name">Tên Địa Điểm:</label><br>
+       <input type="text" id="name" name="name"><br>
+       <label for="latitude">Vĩ độ:</label><br>
+       <input type="number" id="latitude" name="latitude"><br>
+       <label for="longtitude">Kinh độ:</label><br>
+       <input type="number" id="longtitude" name="longtitude"><br>
+       <label for="description">Mô tả:</label><br>
+       <input type="text" id="description" name="description"><br><br>
+       <input type="submit" value="Thêm Địa Điểm">
+   </form>
+
+   <!-- Thêm địa điểm -->
+   <h2>Thêm địa điểm mới</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Thêm địa điểm</button>
+    </form>
+    <h2>Danh sách địa điểm</h2>
+    {% for location in locations %}
+        <p>{{ location.name }} - {{ location.description }}</p>
+    {% endfor %}
+</body>
+</html>
