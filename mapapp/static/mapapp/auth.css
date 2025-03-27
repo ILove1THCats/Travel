@@ -1,0 +1,125 @@
+/* General Styles */
+body {
+  background-color: #B0E2FF; /* Light Blue Background */
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Distribute space around items */
+  width: 80%; /* Adjust the width as needed */
+  max-width: 1200px; /* Limit maximum width */
+  padding: 20px;
+}
+
+/* Form Styles */
+.form-wrapper {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  width: 300px; /* Form Width */
+  text-align: center;
+}
+
+.form-wrapper h2 {
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: normal; /* Adjust font weight */
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  color: #777;
+  font-size: 0.9em;
+  margin-bottom: 5px;
+  font-weight: lighter; /* Adjust font weight */
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  border-radius: 4px; /* Little Rounded Input */
+  box-sizing: border-box; /* Take padding into total width */
+  outline: none; /* Remove outline */
+  color: #555;
+}
+
+.form-group input:focus {
+  border-bottom-color: #5dade2; /* Light Blue Focus Color */
+}
+
+/* Register Button */
+.register-button {
+  background-color: #ADD8E6; /* Light Blue Register Button */
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1em;
+  text-transform: uppercase; /* Text to Uppercase */
+  letter-spacing: 1px; /* Add some spacing */
+}
+
+.register-button:hover {
+  background-color: #87CEEB; /* Slightly darker light blue */
+}
+
+/* Image Styles (Adjust Path as Necessary) */
+.image-container {
+  flex: 1; /* Take available space */
+  text-align: center;
+}
+
+.image-container img {
+  max-width: 100%; /* Ensure image fits container */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Remove extra space below image */
+  margin: 0 auto; /* Center the image */
+}
+
+/* Optional: Plant Illustration */
+.plant-illustration {
+  position: absolute;
+  bottom: 0; /* Adjust position */
+  right: 0; /* Adjust position */
+  max-width: 200px; /* Adjust Size */
+  z-index: -1; /* Behind the form */
+}
+
+/* Adjust the Container */
+body {
+  background-color: #B0E2FF;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around; /* More even distribution */
+  width: 80%;
+  max-width: 1200px;
+  padding: 20px;
+}

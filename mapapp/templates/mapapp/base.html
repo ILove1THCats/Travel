@@ -5,15 +5,15 @@
     <meta charset="utf-8">
 </head>
 <body>
-    <nav>
+    <!-- <nav>
         {% if user.is_authenticated %}
             Xin chào, {{ user.username }}!
-            <a href="{% url 'logout' %}">Đăng xuất</a>
+            <a href="{% url 'account_logout' %}">Đăng xuất</a>
         {% else %}
-            <a href="{% url 'login' %}">Đăng nhập</a>
-            <a href="{% url 'register' %}">Đăng ký</a>
+            <a href="{% url 'account_login' %}">Đăng nhập</a>
+            <a href="{% url 'account_signup' %}">Đăng ký</a>
         {% endif %}
-    </nav>
+    </nav> -->
     {% block content %}
     {% endblock %}
 </body>
