@@ -1,0 +1,17 @@
+{% extends "mapapp/base.html" %}
+{% load i18n %}
+{% load account %}
+{% load static %} 
+
+{% block head_title %}{% trans "Sign up" %}{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'mapapp/auth.css' %}">
+  
+<form class="form-group" method="post">
+    <h1>{% trans "Sign up" %}</h1>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Đăng ký</button>
+    <p>Đã có tài khoản? <a href="{% url 'account_login' %}">Ấn vào đây</a>.</p>
+  </form>
+{% endblock %}
