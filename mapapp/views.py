@@ -60,3 +60,22 @@ def index(request):
 
 def about(request):
     return render(request, 'mapapp/about.html')
+
+def delete_location(request, location_id):
+    location = Location.objects.get(id=location_id)
+    if request.method == 'POST':
+        location.delete()
+        return redirect('/')
+    return render(request, 'mapapp/delete_location.html', {'location': location})
+
+@login_required
+def add_location(request):
+    if request.method == 'POST'and request.user.is_staff:
+        form = LocationForm(request.POST)
+        if form.is_valid():
+            location = form.save()
+            return redirect('/')
+        else:
+            return render(request, 'mapapp/index.html', {'form': form})
+    else:
+        return redirect('/')

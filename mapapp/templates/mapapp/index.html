@@ -43,7 +43,7 @@
     </div>
 
     <!-- Thanh tẩy =)) -->
-    <form method="get" action="">
+    <!-- <form method="get" action="">
         <select name="category">
             <option value="">Tất cả</option>
             <option value="Nhà hàng">Nhà hàng</option>
@@ -51,7 +51,7 @@
             <option value="Địa điểm du lịch">Địa điểm du lịch</option>
         </select>
         <button type="submit">Lọc</button>
-    </form>
+    </form> -->
 
     <!-- <div id="app">
         <div id="map"></div>
@@ -67,24 +67,27 @@
        <label for="name">Tên Địa Điểm:</label><br>
        <input type="text" id="name" name="name"><br>
        <label for="latitude">Vĩ độ:</label><br>
-       <input type="number" id="latitude" name="latitude"><br>
+       <input type="number" step="0.0000001" id="latitude" name="latitude"><br>
        <label for="longtitude">Kinh độ:</label><br>
-       <input type="number" id="longtitude" name="longtitude"><br>
+       <input type="number" step="0.0000001" id="longtitude" name="longtitude"><br>
        <label for="description">Mô tả:</label><br>
        <input type="text" id="description" name="description"><br><br>
        <input type="submit" value="Thêm Địa Điểm">
    </form>
 
-   <!-- Thêm địa điểm -->
-   <!-- <h2>Thêm địa điểm mới</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Thêm địa điểm</button>
+   <!-- {% if request.user.is_staff %}
+    <h2>Thêm Địa Điểm Mới</h2>
+    <form method="post" action="{% url 'add_location' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Thêm Địa Điểm</button>
     </form>
-    <h2>Danh sách địa điểm</h2>
-    {% for location in locations %}
-        <p>{{ location.name }} - {{ location.description }}</p>
-    {% endfor %} -->
+  {% endif %}
+  <div id = "all"> Vĩ độ chuột: {{latitude}}, Kinh độ chuột: {{longtitude}} </div>
+	<div>
+		{% for location in locations %}
+            <p>{{ location.name }} - {{ location.description }}</p>
+        {% endfor %} -->
+    </div>
 </body>
 </html>
