@@ -15,6 +15,34 @@
             padding: 10px;
             display: inline-block;
         }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+            .form-group label {
+            display: block;
+            color: #777;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+            font-weight: lighter;
+        }
+
+            .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            outline: none;
+            color: #555;
+        }
+
+            .form-group input:focus {
+            border-bottom-color: #5dade2;
+        }
     </style>
 </head>
 <body>
@@ -28,13 +56,15 @@
 
     <h1>Bản đồ du lịch TP.HCM</h1>
     
-    <!-- Đây là thanh tìm kiếm của tớ bạn thân à -->
+    <!-- Đây là thanh tìm kiếm-->
     <form method="get" action="">
         <input type="text" name="q" placeholder="Tìm kiếm địa điểm">
         <button type="submit">Tìm kiếm</button>
     </form>
-     
+    
+    
     <!-- Địa điểm tìm được -->
+    <hr>
     <div id="app">
         <div id="map"></div>
         {% for location in locations %}
@@ -61,7 +91,9 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="{% static 'mapapp/script.js' %}"></script>
 
-    <form method="post">
+    <hr>
+
+    <form method="post" class="form-group">
          <h2>Thêm địa điểm mới</h2>
         {% csrf_token %}
        <label for="name">Tên Địa Điểm:</label><br>

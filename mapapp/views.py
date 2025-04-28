@@ -7,18 +7,6 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from .forms import LocationForm, RegisterForm
 
-def index(request):
-    query = request.GET.get('q')
-    category = request.GET.get('category')
-    locations = Location.objects.all()
-    if query:
-        locations = Location.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
-    else:
-        locations = Location.objects.all()
-    if category:
-        locations = Location.objects.filter(category=category)
-    context = {'locations': locations}
-    return render(request, 'mapapp/index.html', context)
 
 def get_locations(request):
     locations = Location.objects.all()
@@ -39,6 +27,16 @@ def register(request):
 
 @login_required
 def index(request):
+    query = request.GET.get('q')
+    # category = request.GET.get('category')
+    locations = None
+    if query:
+        locations = Location.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
+    # else:
+    #     locations = Location.objects.all()
+    # if category:
+    #     locations = Location.objects.filter(category=category)
+
     if request.method == 'POST':
         name = request.POST.get('name')
         latitude = request.POST.get('latitude')
@@ -55,8 +53,8 @@ def index(request):
             return redirect('/')
     else:
         form = LocationForm()
-    context = {'form': form, 'locations': Location.objects.all()}
-    return render(request, 'mapapp/index.html')
+    context = {'form': form, 'locations': locations}
+    return render(request, 'mapapp/index.html', context)
 
 def about(request):
     return render(request, 'mapapp/about.html')
@@ -66,7 +64,7 @@ def delete_location(request, location_id):
     if request.method == 'POST':
         location.delete()
         return redirect('/')
-    return render(request, 'mapapp/delete_location.html', {'location': location})
+    return render(request, 'mapapp/delete_location.html', {'location': location}) 
 
 @login_required
 def add_location(request):
