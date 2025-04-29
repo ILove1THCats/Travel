@@ -73,12 +73,11 @@
     {% if request.user.is_authenticated %}
     <div id="app">
         <div id="map"></div>
+        <td>
         {% for location in locations %}
-            <td>
-                <tr><p>{{ location.name }} - {{ location.description }}</p></tr>
-                <tr><a href="">Xóa</a></tr>
-            </td>
+                <tr><p>{{ location.name }} - {{ location.description }}</p><a href="delete_location" style="color: black; background-color: greenyellow;">Xóa</a></tr>    
         {% endfor %}
+        </td>
     </div>
     {% else %}
     <div id="app">
