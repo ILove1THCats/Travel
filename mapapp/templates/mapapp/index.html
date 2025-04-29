@@ -51,6 +51,11 @@
             <tr><a>TPHCM</a></tr>
             <tr><a href="{% url 'index' %}">Trang chủ</a></tr>
             <tr><a href="{% url 'about' %}">Thông tin</a></tr>
+            {% if request.user.is_authenticated %}
+            <tr><a href="{% url 'account_logout' %}">Đăng xuất</a></tr>
+            {% else %}
+            <a href="{% url 'account_login' %}">Đăng nhập</a>
+            {% endif %}
         </td>
     </div>
 
@@ -65,12 +70,24 @@
     
     <!-- Địa điểm tìm được -->
     <hr>
+    {% if request.user.is_authenticated %}
+    <div id="app">
+        <div id="map"></div>
+        {% for location in locations %}
+            <td>
+                <tr><p>{{ location.name }} - {{ location.description }}</p></tr>
+                <tr><a href="">Xóa</a></tr>
+            </td>
+        {% endfor %}
+    </div>
+    {% else %}
     <div id="app">
         <div id="map"></div>
         {% for location in locations %}
             <p>{{ location.name }} - {{ location.description }}</p>
         {% endfor %}
     </div>
+    {% endif %}
 
     <!-- Thanh tẩy =)) -->
     <!-- <form method="get" action="">
@@ -92,7 +109,7 @@
     <script src="{% static 'mapapp/script.js' %}"></script>
 
     <hr>
-
+    {% if request.user.is_authenticated %}
     <form method="post" class="form-group">
          <h2>Thêm địa điểm mới</h2>
         {% csrf_token %}
@@ -106,6 +123,7 @@
        <input type="text" id="description" name="description"><br><br>
        <input type="submit" value="Thêm Địa Điểm">
    </form>
+   {% endif %}
 
    <!-- {% if request.user.is_staff %}
     <h2>Thêm Địa Điểm Mới</h2>

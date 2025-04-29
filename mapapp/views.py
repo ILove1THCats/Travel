@@ -25,6 +25,20 @@ def register(request):
         form = RegisterForm()
     return render(request, 'mapapp/register.html', {'form': form})
 
+def indexnotauthen(request):
+    query = request.GET.get('q')
+    # category = request.GET.get('category')
+    locations = None
+    if query:
+        locations = Location.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
+    # else:
+    #     locations = Location.objects.all()
+    # if category:
+    #     locations = Location.objects.filter(category=category)
+
+    context = {'locations': locations}
+    return render(request, 'mapapp/index.html', context)
+
 @login_required
 def index(request):
     query = request.GET.get('q')
@@ -36,6 +50,7 @@ def index(request):
     #     locations = Location.objects.all()
     # if category:
     #     locations = Location.objects.filter(category=category)
+    
 
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -58,6 +73,12 @@ def index(request):
 
 def about(request):
     return render(request, 'mapapp/about.html')
+
+# def login_view(request):
+#     return redirect('/accounts/login/')
+
+# def logout_view(request):
+#     return redirect('/accounts/logout/')
 
 def delete_location(request, location_id):
     location = Location.objects.get(id=location_id)

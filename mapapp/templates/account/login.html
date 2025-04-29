@@ -9,11 +9,12 @@
   <link rel="stylesheet" href="{% static 'mapapp/auth.css' %}">
   
   <form class="form-group" method="post">
-    <h1>{% trans "Log In" %}</h1>
+    <h1>{% trans "Đăng nhập" %}</h1>
     {% csrf_token %}
     {{ form.as_p }}  {# Hiển thị form sử dụng as_p để tạo các thẻ <p> #}
     <button type="submit">Đăng nhập</button>
-    <p>Don't have an account? <a href="{% url 'account_signup' %}">Register here</a>.</p>
+    <p>Không có tài khoản? <a href="{% url 'account_signup' %}">Đăng ký đi</a>.</p><br>
+    <p>Hoặc? <a href="{% url 'indexnotauthen' %}">Đăng nhập với tư cách khách</a></p>
   </form>
   
 {% endblock %}
