@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import JsonResponse
 from .models import Location
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.core.exceptions import PermissionDenied
 from .forms import LocationForm, RegisterForm
 
 
@@ -81,18 +82,29 @@ def about(request):
 #     return redirect('/accounts/logout/')
 
 def delete_location(request, location_id):
-    location = Location.objects.get(id=location_id)
+    location = get_object_or_404(Location, pk=location_id)
+
+    if location.created_by != request.user and not request.user.is_staff:
+        raise PermissionDenied
     if request.method == 'POST':
         location.delete()
         return redirect('/')
-    return render(request, 'mapapp/delete_location.html', {'location': location}) 
+    else:
+        return render(request, 'mapapp/delete_confirmation.html', {'location': location}) 
+    # location = Location.objects.get(id=location_id)
+    # if request.method == 'POST':
+    #     location.delete()
+    #     return redirect('/')
+    
 
 @login_required
 def add_location(request):
     if request.method == 'POST'and request.user.is_staff:
         form = LocationForm(request.POST)
         if form.is_valid():
-            location = form.save()
+            location = form.save(commit=False)
+            location.created_by = request.user
+            location.save()
             return redirect('/')
         else:
             return render(request, 'mapapp/index.html', {'form': form})

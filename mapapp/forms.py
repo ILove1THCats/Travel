@@ -12,3 +12,6 @@ class LocationForm(forms.ModelForm):
     class Meta:
         model = Location
         fields = ['name', 'latitude', 'longitude', 'description', 'category']
+
+class DeleteLocationForm(forms.Form):
+    location_id = forms.IntegerField(widget=forms.HiddenInput)

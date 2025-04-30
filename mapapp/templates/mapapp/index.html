@@ -75,7 +75,11 @@
         <div id="map"></div>
         <td>
         {% for location in locations %}
-                <tr><p>{{ location.name }} - {{ location.description }}</p><a href="delete_location" style="color: black; background-color: greenyellow;">Xóa</a></tr>    
+                <tr><p>{{ location.name }} - {{ location.description }}</p>
+                    {% if request.user == location.created_by or request.user.is_staff %}
+                    <a href="{% url 'delete_location' location.id %}" style="color: black; background-color: greenyellow;">Xóa</a>
+                    {% endif %}
+                </tr>    
         {% endfor %}
         </td>
     </div>

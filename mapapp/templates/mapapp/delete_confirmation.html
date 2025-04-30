@@ -1,0 +1,12 @@
+{# mapapp/templates/mapapp/delete_confirmation.html #}
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Xác nhận xóa</h2>
+  <p>Bạn có chắc chắn muốn xóa địa điểm "{{ location.name }}" không?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Xóa</button>
+  </form>
+  <a href="{% url 'index' %}">Hủy</a>
+{% endblock %}
