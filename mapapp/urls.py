@@ -8,5 +8,5 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('add_location/', views.add_location, name='add_location'),
     path('indexnotauthen/', views.indexnotauthen, name='indexnotauthen'),
-    path('delete_location/', views.delete_location, name='delete_location'),
+    path('locations/<int:location_id>/delete/', views.delete_location, name='delete_location'), 
 ]
